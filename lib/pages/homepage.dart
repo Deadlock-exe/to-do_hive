@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:todo/constants/colors.dart';
 import 'package:todo/data/database.dart';
 import 'package:todo/util/dialog_box.dart';
 import 'package:todo/util/todo_tile.dart';
@@ -70,30 +71,46 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 166, 148, 199),
+      backgroundColor: bgColor,
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 127, 101, 172),
+        centerTitle: true,
+        backgroundColor: bgColor,
         title: const Text(
           "TO DO",
           style: TextStyle(
+            fontSize: 26,
             fontWeight: FontWeight.w500,
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.grey[900],
+        foregroundColor: Colors.grey[100],
         onPressed: createNewTask,
         child: const Icon(Icons.add),
       ),
-      body: ListView.builder(
-        itemCount: db.toDoList.length,
-        itemBuilder: (context, index) {
-          return ToDoTile(
-            taskName: db.toDoList[index][0],
-            isDone: db.toDoList[index][1],
-            onChanged: (value) => checkBoxChanged(value, index),
-            deleteTask: (context) => deleteTask(index),
-          );
-        },
+      body: SafeArea(
+        child: db.toDoList.isNotEmpty
+            ? ListView.builder(
+                itemCount: db.toDoList.length,
+                itemBuilder: (context, index) {
+                  return ToDoTile(
+                    taskName: db.toDoList[index][0],
+                    isDone: db.toDoList[index][1],
+                    onChanged: (value) => checkBoxChanged(value, index),
+                    deleteTask: (context) => deleteTask(index),
+                  );
+                },
+              )
+            : Center(
+                child: Container(
+                  child: Image.asset(
+                    'assets/images/box.png',
+                    height: 300,
+                    width: 300,
+                  ),
+                ),
+              ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:todo/constants/colors.dart';
 
 class ToDoTile extends StatelessWidget {
   final String taskName;
@@ -19,9 +20,9 @@ class ToDoTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        left: 24,
-        right: 24,
-        top: 24,
+        left: 20,
+        right: 20,
+        top: 20,
       ),
       child: Slidable(
         endActionPane: ActionPane(
@@ -37,13 +38,31 @@ class ToDoTile extends StatelessWidget {
         ),
         child: Container(
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 223, 216, 236),
-            borderRadius: BorderRadius.circular(12),
+            color: bgColor,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade500,
+                offset: Offset(3, 3),
+                blurRadius: 15,
+                spreadRadius: 1,
+              ),
+              BoxShadow(
+                color: Colors.white,
+                offset: Offset(-3, -3),
+                blurRadius: 15,
+                spreadRadius: 1,
+              ),
+            ],
           ),
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(15),
           child: Row(
             children: [
               Checkbox(
+                activeColor: Colors.grey[800],
+                shape: CircleBorder(
+                  eccentricity: 0.5,
+                ),
                 value: isDone,
                 onChanged: onChanged,
               ),

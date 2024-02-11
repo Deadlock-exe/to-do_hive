@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/constants/colors.dart';
 import 'package:todo/util/my_button.dart';
 
 class DialogBox extends StatelessWidget {
@@ -15,40 +16,55 @@ class DialogBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: 50,
+        vertical: 30,
+      ),
       shape: OutlineInputBorder(
-        borderSide: const BorderSide(
-          color: Color.fromARGB(255, 163, 142, 199),
+        borderSide: BorderSide(
+          color: tileColor,
         ),
         borderRadius: BorderRadius.circular(12),
       ),
-      backgroundColor: const Color.fromARGB(255, 163, 142, 199),
+      backgroundColor: bgColor,
       content: Container(
         height: 120,
         child: Column(
           children: [
-            TextField(
+            TextFormField(
               controller: controller,
               autofocus: true,
               decoration: InputDecoration(
-                hintText: 'Add a new task',
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                label: Text(
+                  "Add a new task",
+                  style: TextStyle(
+                    color: Colors.grey[800],
+                  ),
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
             ),
+            const SizedBox(
+              height: 15,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 MyButton(
-                  text: "Save",
-                  onPressed: onSave,
+                  text: "Cancel",
+                  onPressed: onCancel,
                 ),
                 const SizedBox(
                   width: 8,
                 ),
                 MyButton(
-                  text: "Cancel",
-                  onPressed: onCancel,
+                  text: "Save",
+                  onPressed: onSave,
                 ),
               ],
             )
