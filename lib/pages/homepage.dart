@@ -73,12 +73,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
+        leading: Icon(Icons.checklist_rounded),
+        toolbarHeight: 90,
         centerTitle: true,
         backgroundColor: bgColor,
         title: const Text(
           "TO DO",
           style: TextStyle(
-            fontSize: 26,
+            fontSize: 24,
             fontWeight: FontWeight.w500,
           ),
         ),
